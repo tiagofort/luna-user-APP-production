@@ -17,7 +17,7 @@
                 class="fundo"
             >
               
-                <v-img width="450" aspect-ratio="16/9" :src="imgLogo" id="logo-image" class="white rounded-t-xl"></v-img>
+                <v-img width="450" :src="imgLogo" id="logo-image" class="white rounded-t-xl"></v-img>
                 <v-card class="mx-auto mt-n4 px-6 py-8 rounded-b-xl mb-10" width="450">
                     <v-form v-model="valido">
 
@@ -123,7 +123,7 @@
   
 <script>
 import validacao from '~/utils/validacao';
-import logo from "~/static/general/logoLuna.svg";
+import logo from "~/static/general/logoLuna.png";
 export default {
       data() {
         return{
