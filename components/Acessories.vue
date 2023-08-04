@@ -550,7 +550,7 @@ methods:{
               id_produto: id_produto,
               id_cliente: this.$auth.user._id,
               comentario: ""
-        })
+        }, this.getToken())
         .then((response) => {
               console.log("Success");
               this.getRating();
@@ -586,7 +586,7 @@ methods:{
                 lido: 0,
                 tipo: 0,
                 id_mensagem_origem: ''
-          })
+          }, this.getToken())
           .then((response) => {
                 console.log("Success");
                 this.dialogRequest = false;
@@ -634,7 +634,7 @@ methods:{
                         id_produto: id_produto,
                         id_cliente: this.$auth.user._id,
                         comentario: this.comentario_cliente
-                  })
+                  }, this.getToken())
                   .then((response) => {
                         console.log("Success");
                         this.comentario_cliente = '';
@@ -649,9 +649,9 @@ methods:{
                         });
                   })
     }else {
-        await this.$axios
-                  .put(`/rating/deleteComentario/${this.id_delete}`)
-                  .then((response) => {
+      await this.$axios
+                .put(`/rating/deleteComentario/${this.id_delete}`,{}, this.getToken())
+                .then((response) => {
                         console.log("Success");
                         this.dialog = false;
                         this.seComentario = true;
@@ -663,8 +663,19 @@ methods:{
                           color: 'green', 
                           time: 2000 
                         });
-                  })
+                })
     }
+  },
+
+  getToken(){
+    const token = localStorage.getItem('auth._token.local');
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json', 
+      },
+    };
+    return config;
   },
 
   getId() {

@@ -184,7 +184,7 @@ export default {
         },
 
         setURL(u){
-            this.usuInfo.avatar = u != "" ? u : "";
+          this.usuInfo.avatar = u != "" ? u : "";
         }
 
       },

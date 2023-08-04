@@ -17,7 +17,7 @@
                   rounded="lg"
                   class="white"
               >
-                  <v-img width="350" :src="imgLogo" id="logo-image"></v-img>
+                  <v-img width="450" :src="imgLogo" id="logo-image"></v-img>
                   <v-card class="mx-auto px-6 py-8 elevation-18" width="450">
                       <v-form v-model="valido">
                           <v-text-field
