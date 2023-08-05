@@ -7,9 +7,8 @@
                       cols="12"
                       class="pa-0"
                     >
-
                         <nuxt />
-
+                        <CookieConsent />
                     </v-col>
                 </v-row>
             </v-main>
@@ -19,9 +18,10 @@
 </template>
 
 <script>
-import MenuBarVue from '~/components/MenuBar.vue';
-import SnackBar from '~/components/SnackBar.vue';
-import Footer from '~/components/Footer.vue';
+import MenuBarVue from '@/components/MenuBar.vue';
+import SnackBar from '@/components/SnackBar.vue';
+import Footer from '@/components/Footer.vue';
+import CookieConsent from '@/components/CookieConsent.vue';
 
 export default {
   data: () => ({
@@ -44,7 +44,7 @@ export default {
         }
       ],
   }),
-    components:{ MenuBarVue, SnackBar, Footer }
+    components:{ MenuBarVue, SnackBar, Footer, CookieConsent }
 }
 </script>
 
