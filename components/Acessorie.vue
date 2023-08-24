@@ -88,26 +88,27 @@
                           <div class="ml-3 text-left texts">
                             <strong class="mr-2">- Weight: </strong>
                             <span>
-                              {{ items.peso }} grams
+                              {{ items.peso !== '' ? items.peso + ' grams' : 'Not Informed' }}
                             </span>
                           </div> <br>
                           <div class="ml-3 text-left texts">
                             <strong class="mr-2">- About: </strong>
                           </div> <br>
-                          <div class="ml-5 mt-n5 mb-3 text-left texts">
+                          <div class="ml-5 mt-n5 mb-3 text-justify texts">
                             <span>
                               {{ items.comentario }}
                             </span>
                           </div>
-                          <div v-if="items.desconto == 0" class="ml-3 text-left texts">
-                            <strong class="mr-2 text-h4">- Price: </strong>
-                            <span class="text-h4">
-                              €{{ items.preco }}
-                            </span>
+                          <div class="ml-3 text-left texts">
+                            <strong class="mr-2">- Inventory: </strong>
+                            <span class="text-body-1">
+                              {{ estoque_atual.estoque_atual }}
+                            </span> 
+                            <span v-if="estoque_atual.estoque_atual == 0">(Out of stock)</span>
                           </div> <br>
-                          <div v-if="items.desconto !== 0" class="ml-3 text-left texts">
-                            <strong class="mr-2 text-h4 line-through">- Price: </strong>
-                            <span class="text-h4 line-through">
+                          <div class="ml-3 text-left texts">  
+                            <strong class="mr-2 text-h4">- Price: </strong>
+                            <span :class="getClass()">
                               €{{ items.preco }}
                             </span>
                           </div> <br>
@@ -116,15 +117,8 @@
                             <span class="text-h4">
                               €{{ getDesconto(items.preco) }}
                             </span>
-                          </div> <br>
-                          <div class="ml-3 mt-n5 text-left texts">
-                            <strong class="mr-2 text-body-1">- Inventory: </strong>
-                            <span class="text-body-1">
-                              {{ estoque_atual.estoque_atual }}
-                            </span> 
-                            <span v-if="estoque_atual.estoque_atual == 0">(Out of stock)</span>
-                          </div> <br>
-                          <div class="text-left">
+                          </div>
+                          <div class=" ml-5 mt-2 pa-5 text-left">
                             <v-btn v-if="$auth.loggedIn" color="#b86935" class="white--text mb-3" @click="requisicao()">Make a request</v-btn>
                             <p v-if="$auth.loggedIn"> Or send us message: +353 089 941 4489</p>
                           </div>
@@ -193,43 +187,37 @@
                             <div class="ml-3 text-left texts">
                               <strong class="mr-2">- Weight: </strong>
                               <span>
-                                {{ items.peso }} grams
+                                {{ items.peso !== '' ? items.peso + ' grams' : 'Not Informed' }}
                               </span>
                             </div> <br>
                             <div class="ml-3 text-left texts">
                               <strong class="mr-2">- About: </strong>
                             </div> <br>
-                            <div class="ml-5 mt-n5 mb-3 text-left texts">
+                            <div class="ml-5 mt-n5 mb-3 text-justify texts">
                               <span>
                                 {{ items.comentario }}
                               </span>
                             </div>
-                            <div v-if="items.desconto == 0" class="ml-3 text-left texts">
-                              <strong class="mr-2 text-h4">- Price: </strong>
-                              <span class="text-h4">
-                                €{{ items.preco }}
-                              </span>
+                            <div class="ml-3 text-left texts">
+                              <strong class="mr-2">- Inventory: </strong>
+                              <span class="text-body-1">
+                                {{ estoque_atual.estoque_atual }}
+                              </span> 
+                              <span v-if="estoque_atual.estoque_atual == 0">(Out of stock)</span>
                             </div> <br>
-                            <div v-if="items.desconto !== 0" class="ml-3 text-left texts">
-                              <strong class="mr-2 text-h4 line-through">- Price: </strong>
-                              <span class="text-h4 line-through">
-                                €{{ items.preco }}
-                              </span>
-                            </div> <br>
+                            <div class="ml-3 text-left texts">  
+                            <strong class="mr-2 text-h4">- Price: </strong>
+                            <span :class="getClass()">
+                              €{{ items.preco }}
+                            </span>
+                          </div> <br>
                             <div v-if="items.desconto !== 0" class="ml-3 text-left texts">
                               <strong class="mr-2 text-h4">- Sale Price: </strong>
                               <span class="text-h4">
                                 €{{ getDesconto(items.preco) }}
                               </span>
                             </div> <br>
-                            <div class="ml-3 mt-n5 text-left texts">
-                              <strong class="mr-2 text-body-1">- Inventory: </strong>
-                              <span class="text-body-1">
-                                {{ estoque_atual.estoque_atual }}
-                              </span> 
-                              <span v-if="estoque_atual.estoque_atual == 0">(Out of stock)</span>
-                            </div> <br>
-                            <div class="text-left">
+                            <div class="ml-5 mt-2 text-left">
                               <v-btn v-if="$auth.loggedIn" color="#b86935" class="white--text mb-3" @click="requisicao()">Make a request</v-btn>
                               <p v-if="$auth.loggedIn"> Or send us message: +353 089 941 4489</p>
                             </div>
@@ -348,8 +336,8 @@
                 </v-expansion-panels>         
             </v-col>
         </v-row>
-        <v-card class="pa-3 mt-2">
-          <div v-if="sliceItens.length > 0" class="mt-5 mb-5 text-body-1 texts text-left">
+        <v-card v-if="sliceItens.length > 0" class="pa-3 mt-2">
+          <div class="mt-5 mb-5 text-body-1 texts text-left">
             <strong>What people usually buy together</strong>
           </div>
           <v-row>
@@ -708,7 +696,12 @@ methods:{
         name: "accessories-acessories",
         params: { acessories: id },
     });
+  },
+
+  getClass(){
+    return this.items.desconto === 0 ? "text-h4" : "text-h4 line-through";
   }
+  
 },
 
 computed: {

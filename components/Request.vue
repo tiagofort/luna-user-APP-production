@@ -8,8 +8,17 @@
             >
                 <v-card>
                     <v-card-title>
-                        <span class="text-h5">Request</span>
+                        <span class="text-h5 texts mb-2">Request</span>
                     </v-card-title>
+                    <v-card-subtitle>
+                        <span class="text-subtitle-1 texts"><strong>* </strong>We are not yet doing any payment transaction through our website.</span>
+                        <span class="text-subtitle-1 texts"> Please, send us a request and we will be in touch by whatsapp or email.</span><br>
+                        <span class="text-subtitle-1 texts">
+                            <strong>* Note: </strong>
+                            If you have an alternative contact of your choice that is not included in your registration, please write it in the comment field.
+                             Thank you!
+                        </span>
+                    </v-card-subtitle>
                     <v-card-text>
                         <v-container>
                             <v-row>
