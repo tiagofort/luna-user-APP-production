@@ -2,12 +2,6 @@
   <v-container>
     <v-row v-if="slides.length > 0">
           <v-col class="ml-2">
-              <v-lazy
-                v-model="isActive"
-                :options="{ threshold: 1 }"
-                min-height="200"
-                transition="fade-transition"
-              >
                   <v-card
                       elevation="24"
                       max-width="450"
@@ -17,7 +11,7 @@
                           :cycle="cycle"
                           :show-arrows="true"
                           hide-delimiter-background
-                          delimiter-icon="mdi-minus"
+                          hide-delimiters
                           virtual-mode
                       >
                               <a>
@@ -27,12 +21,13 @@
                                     :src="slide.url"
                                     class="transparent"
                                     virtual-mode
+                                    reverse-transition="fade-transition"
+                                    transition="fade-transition"
                                     @click="openFeatured(slide.id_produto)"
                                 ></v-carousel-item>
                               </a>
                       </v-carousel>
                   </v-card>
-              </v-lazy>     
           </v-col>   
     </v-row>     
   </v-container>  
@@ -51,7 +46,7 @@ export default {
   methods:{
 
     async initializeSlides() {
-      this.$axios
+      await this.$axios
         .get("/slide/buscarSlides")
         .then((response) => (this.slides = response.data));
     },
@@ -61,12 +56,29 @@ export default {
           name: "accessories-acessories",
           params: { acessories: id },
       });
-    }
+    },
+
+    preloadImage(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    },
 
   },
 
-  async mounted() {
-    await this.initializeSlides();
+  async beforeMount() {
+    try {
+      const response =  await this.$axios.get("/slide/buscarSlides");                                  
+      this.slides = response.data; 
+      const imgs = this.slides;
+      await Promise.all(imgs.map(item => this.preloadImage(item.url)));
+      console.log('All images preloaded');
+    } catch (error) {
+      console.error('Error preloading images:', error);
+    }
   }
 
 }

@@ -3,7 +3,7 @@
         <v-container :max-width="getMaxWidth" class="text-center fundo">
             <v-row justify="center" class="mb-5">
                 <v-col>
-                    <Acessories />
+                    <Acessorie />
                 </v-col>
             </v-row>
         </v-container>
@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import Acessories from '@/components/Acessories.vue';
+import Acessorie from '~/components/Acessorie.vue';
 export default {
     data () {
      return{
      
     }
   },
-  components:{ Acessories },
+  components:{ Acessorie },
   async mounted() {},
   methods:{},
   computed: {

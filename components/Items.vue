@@ -22,7 +22,7 @@
                         aspect-ratio="1"
                         max-width="350"
                         max-height="450"
-                        class="grey lighten-2"
+                        class="grey lighten-2 image-transition"
                         @click="openItem(item._id)"
                       ></v-img>
                   </a>  
@@ -70,7 +70,16 @@ export default {
         name: "accessories-acessories",
         params: { acessories: id },
       });
-    }
+    },
+
+    preloadImage(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    },
 
   },
 
@@ -90,8 +99,19 @@ export default {
   
   },
   
-  mounted() {
-    this.initializingItens();
+  async beforeMount() {
+    try {
+      const response =  await this.$axios.get("/item/buscarNovidades");                                  
+      this.novidades = response.data; 
+      const imgs = this.novidades.slice(0,8);
+      await Promise.all(imgs.map(item => {
+        this.preloadImage(item.midia.url1);
+        this.preloadImage(item.midia.url2);
+      }));
+      console.log('All images preloaded');
+    } catch (error) {
+      console.error('Error preloading images:', error);
+    }
   }
 
 };
@@ -115,7 +135,7 @@ export default {
 
 @media (max-width: 300px) {
   font-texts {
-    font-size: 12px; /* Adjust the font size as needed */
+    font-size: 12px;
   }
 }
 
@@ -181,6 +201,15 @@ a {
   background-repeat: no-repeat;
   background-size: 100% 2px;
   background-position: 0 center;
+}
+
+.image-transition {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.image-transition:hover {
+  transform: scale(1.05);
+  opacity: 0.9; 
 }
 
 </style>

@@ -514,14 +514,24 @@ methods:{
           .get(`/item/buscarId/${id}`, {})
           .then((response) => {
              this.items = response.data;
-             this.imgPrincipal = this.items.midia.url1 ? this.items.midia.url1: "";
-             this.imgs.push(this.items.midia.url1 ? this.items.midia.url1: comingSoon);
-             this.imgs.push(this.items.midia.url2 ? this.items.midia.url2: comingSoon);
-             this.imgs.push(this.items.midia.url3 ? this.items.midia.url3: comingSoon);
-             this.imgs.push(this.items.midia.url4 ? this.items.midia.url4: comingSoon);
-             this.imgs.push(this.items.midia.url5 ? this.items.midia.url5: comingSoon);
-             this.imgs.push(this.items.midia.url6 ? this.items.midia.url6: comingSoon);
-             this.imgs.push(this.items.midia.url7 ? this.items.midia.url7: comingSoon);
+             if(this.items.midia.url1){
+              this.imgs.push(this.items.midia.url1);
+             }
+             if(this.items.midia.url2){
+              this.imgs.push(this.items.midia.url2);
+             }
+             if(this.items.midia.url3){
+              this.imgs.push(this.items.midia.url3);
+             }
+             if(this.items.midia.url4){
+               this.imgs.push(this.items.midia.url4);
+             }
+             if(this.items.midia.url5){
+               this.imgs.push(this.items.midia.url5);
+             }
+             if(this.items.midia.url6){
+               this.imgs.push(this.items.midia.url6);
+             }
           }).catch((error) => {
             console.log(error);
           });
@@ -680,10 +690,6 @@ methods:{
 
   getId() {
     return window.location.pathname.split("/")[2];
-  },
-
-  mudarImagem(url){
-    this.imgPrincipal = url;
   },
 
   getDesconto(price){
