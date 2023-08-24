@@ -1,11 +1,5 @@
 <template>
     <v-container>
-        <v-lazy
-          v-model="isActive"
-          :options="{ threshold: 1.0 }"
-          min-height="200"
-          transition="fade-transition"
-        >
             <v-row class="ml-2 mt-1">
                 <v-row>
                   <v-col v-for="(item,i) in stones" :key="i" sm="4" md="4" lg="3" class="pa-2 d-flex align-center justify-center">
@@ -14,8 +8,7 @@
                         </v-sheet>  
                   </v-col>
                 </v-row>
-            </v-row>
-        </v-lazy>     
+            </v-row>     
     </v-container>
 </template>
 

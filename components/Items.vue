@@ -204,7 +204,7 @@ a {
 }
 
 .image-transition {
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition: transform 0.9s ease-in-out, opacity 0.9s ease-in-out;
 }
 
 .image-transition:hover {
