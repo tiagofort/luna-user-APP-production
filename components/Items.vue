@@ -18,7 +18,7 @@
                 <template v-slot:default="{ hover }">  
                   <a>
                       <v-img
-                        :src="hover? item.midia.url2 : item.midia.url1"
+                        :src="hover? item.midia.url2 || item.midia.url1 : item.midia.url1"
                         aspect-ratio="1"
                         max-width="350"
                         max-height="450"
