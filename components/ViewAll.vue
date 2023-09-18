@@ -100,12 +100,12 @@
                                         <template v-slot:default="{ hover }">  
                                         <a>
                                             <v-img
-                                            :src="hover? item.midia.url2 || item.midia.url1 : item.midia.url1"
-                                            aspect-ratio="1"
-                                            max-width="200"
-                                            max-height="350"
-                                            class="grey lighten-2"
-                                            @click="openItem(item._id)"
+                                                :src="hover? item.midia.url2 || item.midia.url1 : item.midia.url1"
+                                                aspect-ratio="1"
+                                                max-width="200"
+                                                max-height="350"
+                                                class="grey lighten-2"
+                                                @click="openItem(item._id)"
                                             >
                                             </v-img>
                                         </a>  

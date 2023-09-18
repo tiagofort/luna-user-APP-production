@@ -26,7 +26,7 @@ export default {
                             })
                             .then((response) => {
                               console.log("Success");
-                              this.$notifier.showMessage({ content: 'Account created! We send a confirmation link to the email used for registration. Please click on the link and confirm your registration.', color: 'green', time: 4000 });
+                              this.$notifier.showMessage({ content: 'Account created! We sent a confirmation link to the email used for registration. Please click on the link and confirm your registration.', color: 'green', time: 4000 });
                               this.$router.push({
                                  name: "index",
                               });
